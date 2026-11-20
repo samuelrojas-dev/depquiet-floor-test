@@ -1,0 +1,10 @@
+[project]
+name = "depquiet-floor-test"
+version = "0.1.0"
+description = "Test project: security fixes that need a newer Python than requires-python allows."
+requires-python = ">=3.10"
+dependencies = [
+    "beautifulsoup4>=4.13",
+    "pillow>=12",
+]
+
