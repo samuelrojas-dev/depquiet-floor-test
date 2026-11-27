@@ -1,0 +1,20 @@
+
+🔧 Fix plan
+   ✗ ansible → 12.2.0: does not resolve together with the rest: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because only the followi…
+   ✗ ansible-core → 2.16.19rc1: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because there is no version of ansible-core==2.16.19rc1 and your…
+   ✗ autobahn → 26.10.1: blocked by daphne, and no version of it allows the fix: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because d…
+   ✗ azure-identity → 1.16.1: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ cryptography → 50.0.0: does not resolve together with the rest: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because pyopenssl==26.0.…
+   ✗ daphne → 4.2.2: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ djangorestframework → 3.18.2: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ dnspython → 2.9.2: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ mistune → 3.3.4: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ oauthlib → 4.0.1: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ paramiko → 5.0.0: does not resolve together with the rest: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because only jms-ansible…
+   ✗ pymongo → 4.18.3: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ pyzipper → 0.4.0: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ requests → 2.33.0: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ setuptools → 84.1.0: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ soupsieve → 4.0.0: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ twisted → 26.10.0rc1: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ werkzeug → 3.1.9: fits only by moving ansible-runner back from 2.4.0.2 to 0.0.0, which the project depends on directly: left out. Move it back yourself if you accept that.

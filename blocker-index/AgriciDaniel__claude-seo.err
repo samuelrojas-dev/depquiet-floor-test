@@ -1,0 +1,1 @@
+depquiet: nothing scanned: pip-audit: found no registry packages to audit in uv.lock. OSV.dev fallback failed too: found lockfiles but could not read any packages from them.

@@ -1,0 +1,19 @@
+
+🔧 Fix plan
+   ✓ certifi 2026.1.4 → 2026.10.18: upgrade
+   ✓ cryptography 49.0.0 → 50.0.0: upgrade  (major version change)
+   ✓ dnspython 2.8.0 → 2.9.2: upgrade
+   ✓ filelock 3.24.2 → 4.2.1: upgrade  (major version change)
+   ✓ fsspec 2026.2.0 → 2026.6.0: upgrade
+   ✓ msgpack 1.1.2 → 1.2.3: upgrade
+   ✓ multidict 6.7.1 → 6.9.1: upgrade
+   ✓ pyasn1 0.6.4 → 0.6.5: upgrade
+   ✓ pygments 2.19.2 → 2.20.0: upgrade
+   ✓ python-multipart 0.0.22 → 0.0.31: upgrade
+   ✓ setuptools 78.1.1 → 84.1.0: upgrade  (major version change)
+   ✓ starlette 0.52.1 → 1.3.1: upgrade  (major version change)
+   ✓ urllib3 2.6.3 → 2.8.0: upgrade
+
+   Verified with uv's resolver: all fixes resolve together.
+   Then run: uv lock --upgrade-package certifi==2026.10.18 --upgrade-package cryptography==50.0.0 --upgrade-package dnspython==2.9.2 --upgrade-package filelock==4.2.1 --upgrade-package fsspec==2026.6.0 --upgrade-package msgpack==1.2.3 --upgrade-package multidict==6.9.1 --upgrade-package pyasn1==0.6.5 --upgrade-package pygments==2.20.0 --upgrade-package python-multipart==0.0.31 --upgrade-package setuptools==84.1.0 --upgrade-package starlette==1.3.1 --upgrade-package urllib3==2.8.0
+   Verified with uv's resolver only: run your tests, above all for a major version change.

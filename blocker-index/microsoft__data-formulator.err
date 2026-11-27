@@ -1,0 +1,31 @@
+
+🔧 Fix plan
+   ✓ aiohttp 3.14.3 → 3.14.4: upgrade
+   ✓ anyio 4.12.1 → 4.14.2: upgrade
+   ✓ certifi 2026.1.4 → 2026.10.18: upgrade
+   ✓ cryptography 49.0.0 → 50.0.0: upgrade  (major version change)
+   ✓ dnspython 2.8.0 → 2.9.2: upgrade
+   ✓ filelock 3.20.3 → 4.2.1: upgrade  (major version change)
+   ✓ fsspec 2026.1.0 → 2026.6.0: upgrade
+   ✓ litellm 1.91.3 → 1.100.4: widen your requirement
+   ✓ multidict 6.7.1 → 6.9.1: upgrade
+   ✓ oauthlib 3.3.1 → 4.0.1: upgrade  (major version change)
+   ✓ pyasn1 0.6.4 → 0.6.5: upgrade
+   ✓ pyjwt 2.13.0 → 2.15.0: upgrade
+   ✓ pymongo 4.16.0 → 4.18.3: upgrade
+   ✓ setuptools 83.0.0 → 84.1.0: upgrade  (major version change)
+   ✓ soupsieve 2.8.4 → 4.1.3: requires-python unchanged, uv locks one release per Python range (newer Pythons get 4.1.3, which closes all 6 alerts; older Pythons keep 3.0.1, which closes 3, so nothing else moves back)  (major version change)
+   ✓ thrift 0.22.0 → 0.24.0: upgrade
+   ✓ urllib3 2.7.0 → 2.8.0: upgrade
+   ✓ werkzeug 3.1.6 → 3.1.9: upgrade
+
+   It also changes uv.lock:
+     · databricks-sql-connector 4.3.0 → 4.9.0
+     · yarl 1.22.0 → 1.25.1
+     · pydantic-settings 2.16.3 (added)
+
+   Dependabot resolves for the oldest Python requires-python allows (3.11) and filters out releases that need a newer one: soupsieve 4.1.3 needs Python >=3.11.5. uv locks them only for the Pythons they support.
+
+   Verified with uv's resolver: all fixes resolve together.
+   Then run: uv lock --upgrade-package aiohttp==3.14.4 --upgrade-package anyio==4.14.2 --upgrade-package certifi==2026.10.18 --upgrade-package cryptography==50.0.0 --upgrade-package dnspython==2.9.2 --upgrade-package filelock==4.2.1 --upgrade-package fsspec==2026.6.0 --upgrade-package litellm==1.100.4 --upgrade-package multidict==6.9.1 --upgrade-package oauthlib==4.0.1 --upgrade-package pyasn1==0.6.5 --upgrade-package pyjwt==2.15.0 --upgrade-package pymongo==4.18.3 --upgrade-package setuptools==84.1.0 --upgrade-package soupsieve --upgrade-package thrift==0.24.0 --upgrade-package urllib3==2.8.0 --upgrade-package werkzeug==3.1.9
+   Verified with uv's resolver only: run your tests, above all for a major version change.

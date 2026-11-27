@@ -1,0 +1,27 @@
+
+🔧 Fix plan
+   ✓ filelock 3.20.3 → 4.2.1: upgrade  (major version change)
+   ✓ opentelemetry-api 1.45.1 → 1.45.2: upgrade
+   ✗ soupsieve → 4.0.0: already locked at 4.1.2 for the Pythons that can install it; the 2.10 copy is for older Pythons, and pinning 4.0.0 would move the newer copy back. Only raising requires-python to >=3.11.5 fixes the o…
+
+   It also changes uv.lock:
+     · boto3 1.43.108 → 1.44.13
+     · botocore 1.43.108 → 1.44.13
+     · litellm 1.104.0 → 1.111.0
+     · opentelemetry-instrumentation 0.66b1 → 0.66b2
+     · opentelemetry-instrumentation-asgi 0.66b1 → 0.66b2
+     · opentelemetry-instrumentation-fastapi 0.66b1 → 0.66b2
+     · opentelemetry-sdk 1.45.1 → 1.45.2
+     · opentelemetry-semantic-conventions 0.66b1 → 0.66b2
+     · opentelemetry-util-http 0.66b1 → 0.66b2
+     · pydantic 2.12.5 → 2.12.5, 2.14.4
+     · pydantic-core 2.41.5 → 2.41.5, 2.50.5
+     · tiktoken 0.12.0 → 0.12.0, 0.14.0
+     · typing-extensions 4.15.0 → 4.15.0, 4.16.0
+     · typing-inspection 0.4.2 → 0.4.2, 0.4.5
+
+   Dependabot resolves for the oldest Python requires-python allows (3.10) and filters out releases that need a newer one: filelock 4.2.1 needs Python >=3.11. uv locks them only for the Pythons they support.
+
+   Verified with uv's resolver: 2 of 3 fixes resolve together.
+   Then run: uv lock --upgrade-package filelock==4.2.1 --upgrade-package opentelemetry-api==1.45.2
+   Verified with uv's resolver only: run your tests, above all for a major version change.

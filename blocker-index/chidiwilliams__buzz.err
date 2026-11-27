@@ -1,0 +1,36 @@
+
+🔧 Fix plan
+   ✓ aiohttp 3.13.2 → 3.14.4: upgrade
+   ✓ anyio 4.12.0 → 4.14.2: upgrade
+   ✓ cryptography 46.0.3 → 50.0.0: upgrade  (major version change)
+   ✓ filelock 3.20.0 → 4.2.1: upgrade  (major version change)
+   ✓ gitpython 3.1.45 → 3.2.1: upgrade
+   ✓ idna 3.11 → 3.15: upgrade
+   ✓ jaraco-context 6.0.1 → 6.1.0: upgrade
+   ✓ mako 1.3.10 → 1.3.12: upgrade
+   ✓ marshmallow 3.26.1 → 3.26.2: upgrade
+   ✓ msgpack 1.1.2 → 1.2.3: upgrade
+   ✓ multidict 6.7.0 → 6.9.1: upgrade
+   ✓ nltk 3.10.3 → 3.10.4: upgrade
+   ✓ onnx 1.20.0 → 1.22.0: upgrade
+   ✓ pillow 12.0.0 → 13.0.0: upgrade  (major version change)
+   ✓ protobuf 5.29.5 → 5.29.6: upgrade
+   ✓ pyarrow 22.0.0 → 23.0.1: upgrade  (major version change)
+   ✓ pygments 2.19.2 → 2.20.0: upgrade
+   ✓ pytorch-lightning 2.6.0 → 2.6.6: upgrade
+   ✓ setuptools 80.9.0 → 84.1.0: upgrade  (major version change)
+   ✓ urllib3 2.7.0 → 2.8.0: upgrade
+   ✓ werkzeug 3.1.4 → 3.1.9: upgrade
+   ✗ fsspec → 2026.6.0: blocked by nemo-toolkit-asr, and no version of it allows the fix: Because nemo-toolkit-asr>=2.8.0rc2 depends on fsspec==2024.12.0 and torch==2.8.0+cpu depends on fsspec==2026.6.0, we can conclude tha…
+   ✗ hydra-core → 1.3.6: blocked by nemo-toolkit-asr, and no version of it allows the fix: Because nemo-toolkit-asr[asr]>=2.8.0rc2 depends on hydra-core>1.3,<=1.3.2 and hydra-core==1.3.6, we can conclude that nemo-toolkit-as…
+   ✗ lightning → 2.6.6: blocked by nemo-toolkit-asr, and no version of it allows the fix: Because nemo-toolkit-asr[asr]>=2.8.0rc2 depends on lightning>2.2.1,<=2.4.0 and lightning==2.6.6, we can conclude that nemo-toolkit-as…
+   ✗ torch → 2.13.0: does not resolve together with the rest: Because torchaudio==2.8.0+cpu depends on torch==2.8.0 and your project depends on torch{sys_platform != 'darwin'}==2.13.0, we can conclude that your project a…
+
+   It also changes uv.lock:
+     · virtualenv 20.35.4 → 21.14.5
+     · yarl 1.22.0 → 1.25.1
+     · python-discovery 1.9.7 (added)
+
+   Verified with uv's resolver: 21 of 25 fixes resolve together.
+   Then run: uv lock --upgrade-package aiohttp==3.14.4 --upgrade-package anyio==4.14.2 --upgrade-package cryptography==50.0.0 --upgrade-package filelock==4.2.1 --upgrade-package gitpython==3.2.1 --upgrade-package idna==3.15 --upgrade-package jaraco-context==6.1.0 --upgrade-package mako==1.3.12 --upgrade-package marshmallow==3.26.2 --upgrade-package msgpack==1.2.3 --upgrade-package multidict==6.9.1 --upgrade-package nltk==3.10.4 --upgrade-package onnx==1.22.0 --upgrade-package pillow==13.0.0 --upgrade-package protobuf==5.29.6 --upgrade-package pyarrow==23.0.1 --upgrade-package pygments==2.20.0 --upgrade-package pytorch-lightning==2.6.6 --upgrade-package setuptools==84.1.0 --upgrade-package urllib3==2.8.0 --upgrade-package werkzeug==3.1.9
+   Verified with uv's resolver only: run your tests, above all for a major version change.

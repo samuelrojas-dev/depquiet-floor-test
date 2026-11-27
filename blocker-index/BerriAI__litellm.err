@@ -1,0 +1,16 @@
+
+⚠️  exclude-newer-package holds brotli at releases before 2026-10-22T14:01:00Z, older than your cooldown's cut-off (2026-11-24T20:44:09Z): uv keeps brotli on old releases. Remove the entry.
+⚠️  exclude-newer-package holds pypdf at releases before 2026-10-28T17:01:00Z, older than your cooldown's cut-off (2026-11-24T20:44:09Z): uv keeps pypdf on old releases. Remove the entry.
+
+🔧 Fix plan
+   ✗ dnspython → 2.9.2: needs a newer Python: see Python floor below
+   ✗ filelock → 4.2.1: needs a newer Python: see Python floor below
+   ✗ pillow → 13.0.0: needs a newer Python: see Python floor below
+   ✗ tornado → 6.6.1: needs a newer Python: see Python floor below
+
+   Python floor:
+     Raising requires-python to >=3.11 would let 4 fixes install (dnspython, tornado, filelock, pillow; 50 alerts), verified with uv's resolver.
+     It drops Python 3.9 and 3.10: fine for an application, a breaking change for users of a published library.
+     For a library, keep requires-python and add this to pyproject.toml instead: [tool.uv] environments = ["python_full_version >= '3.11'"]. uv then locks only for those Pythons, so your CI and development get the fixes and users still install on older ones, where the fixes do not apply. Verified with uv's resolver.
+     Dependabot does not read environments: it still picks its Python from requires-python, so it will not open these updates itself, and each later fix that needs a newer Python means another manual uv lock. Raising requires-python is the only change Dependabot follows. depquiet's fix-pr Action can do that relock on a schedule and open the pull request.
+     Add --raise-python-floor to put that change in the plan.

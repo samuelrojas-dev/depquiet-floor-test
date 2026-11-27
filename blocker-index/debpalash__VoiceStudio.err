@@ -1,0 +1,9 @@
+
+🔧 Fix plan
+   ✓ setuptools 79.0.1 → 84.1.0: widen your requirement  (major version change)
+   ✗ stanza → 1.12.2: blocked by argostranslate, and no version of it allows the fix: While the active Python version is 3.11, the resolution failed for other Python versions supported by your project. Consider limiting y…
+   ✗ torch → 2.13.0: does not resolve together with the rest: While the active Python version is 3.11, the resolution failed for other Python versions supported by your project. Consider limiting your project's supported…
+
+   Verified with uv's resolver: 1 of 3 fixes resolve together.
+   Then run: uv lock --upgrade-package setuptools==84.1.0
+   Verified with uv's resolver only: run your tests, above all for a major version change.

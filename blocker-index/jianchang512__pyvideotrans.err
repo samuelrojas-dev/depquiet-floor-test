@@ -1,0 +1,28 @@
+environment that is not the current one, consider limiting the environments with `tool.uv.environments`. The `requires-python` va…
+   ✗ litellm → 1.100.4: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because litellm==1.100.4 depends on aiohttp>=3.14.2,<4.0 and your…
+   ✗ onnx → 1.22.0: could not be checked: uv could not build s3tokenizer==0.0.1 from source. Its last error: ModuleNotFoundError: No module named 'pkg_resources'
+   ✗ pillow → 13.0.0: pillow 13.0.0 only supports Python >=3.11: raise requires-python, or limit the upgrade to those Python versions with a marker. --fix-plan checks whether raising it lets the fix install.
+   ✗ protobuf → 5.29.6: does not resolve together with the rest: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because proto-plus==1.23…
+   ✗ py7zr → 1.1.3: does not resolve together with the rest: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because py7zr==1.1.3 dep…
+   ✗ pyasn1 → 0.6.5: does not resolve together with the rest: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because pyasn1-modules==…
+   ✗ torch → 2.13.0: does not resolve together with the rest: The resolution failed for an environment that is not the current one, consider limiting the environments with `tool.uv.environments`. Because there is no vers…
+   ✗ tornado → 6.6.1: tornado 6.6.1 only supports Python >=3.11: raise requires-python, or limit the upgrade to those Python versions with a marker. --fix-plan checks whether raising it lets the fix install.
+
+   It also changes uv.lock:
+     · ⚠ s3tokenizer 0.3.0 → 0.0.8 (an older version)
+     · gradio-client 2.2.0 → 2.5.0
+     · hf-gradio 0.4.1 (added)
+     · cfgv 3.5.0 (removed: nothing requires it any more)
+     · distlib 0.4.3 (removed: nothing requires it any more)
+     · ffmpy 1.0.0 (removed: nothing requires it any more)
+     · identify 2.6.19 (removed: nothing requires it any more)
+     · nodeenv 1.10.0 (removed: nothing requires it any more)
+     · pre-commit 4.6.0 (removed: nothing requires it any more)
+   The lock moves s3tokenizer to an older version to fit the fixes together: check that before merging.
+
+   Python floor:
+     some fixes need a newer Python, but pyproject.toml declares requires-python '>=3.10, <3.11', which depquiet will not rewrite.
+
+   Verified with uv's resolver: 30 of 47 fixes resolve together, plus 2 partial fixes on your current Python range.
+   Then run: uv lock --upgrade-package anyio==4.14.2 --upgrade-package brotli==1.2.1 --upgrade-package brotlicffi==1.2.1.0 --upgrade-package certifi==2026.10.18 --upgrade-package diffusers==0.38.0 --upgrade-package fonttools==4.60.2 --upgrade-package gitpython==3.2.1 --upgrade-package gradio==6.16.0 --upgrade-package httplib2==0.32.0 --upgrade-package hydra-core==1.3.6 --upgrade-package idna==3.15 --upgrade-package lightning==2.6.6 --upgrade-package mako==1.3.12 --upgrade-package markdown==3.8.1 --upgrade-package marshmallow==3.26.2 --upgrade-package msgpack==1.2.3 --upgrade-package multidict==6.9.1 --upgrade-package oauthlib==4.0.0 --upgrade-package pip==26.2 --upgrade-package pyarrow==23.0.1 --upgrade-package pygments==2.20.0 --upgrade-package python-multipart==0.0.31 --upgrade-package pytorch-lightning==2.6.6 --upgrade-package requests==2.33.0 --upgrade-package sentencepiece==0.2.1 --upgrade-package setuptools==84.1.0 --upgrade-package starlette==1.3.1 --upgrade-package urllib3==2.8.0 --upgrade-package virtualenv==21.14.10 --upgrade-package wheel==0.46.2 --upgrade-package pillow==12.3.0 --upgrade-package tornado==6.5.9
+   Verified with uv's resolver only: run your tests, above all for a major version change.

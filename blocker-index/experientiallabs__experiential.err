@@ -1,0 +1,8 @@
+
+⚠️  exclude-newer-package holds certifi at releases before 2026-10-21T00:00:00Z, older than your cooldown's cut-off (2026-11-20T20:42:16Z): uv keeps certifi on old releases. Remove the entry.
+⚠️  exclude-newer-package holds filelock at releases before 2026-10-18T00:00:00Z, older than your cooldown's cut-off (2026-11-20T20:42:16Z): uv keeps filelock on old releases. Remove the entry.
+⚠️  exclude-newer-package holds pyasn1 at releases before 2026-10-28T00:00:00Z, older than your cooldown's cut-off (2026-11-20T20:42:16Z): uv keeps pyasn1 on old releases. Remove the entry.
+
+🔧 Fix plan
+   ✗ tornado → 6.6.1: blocked by exp-mitmproxy, and no version of it allows the fix: While the active Python version is 3.13, the resolution failed for other Python versions supported by your project. Consider limiting yo…
+   ✗ transformers → 5.10.0: blocked by tinker, and no version of it allows the fix: While the active Python version is 3.13, the resolution failed for other Python versions supported by your project. Consider limiting your proj…

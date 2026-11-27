@@ -1,0 +1,11 @@
+
+🔧 Fix plan
+   ✓ tornado 6.6 → 6.6.1: upgrade
+
+   It also changes uv.lock:
+     · llama-index 0.14.25 → 0.14.26
+     · llama-index-core 0.14.25 → 0.14.26
+
+   Verified with uv's resolver: all fixes resolve together.
+   Then run: uv lock --upgrade-package tornado==6.6.1
+   Verified with uv's resolver only: run your tests, above all for a major version change.

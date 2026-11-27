@@ -1,0 +1,3 @@
+
+🔧 Fix plan
+   ✗ protobuf → 6.33.5: does not resolve together with the rest: While the active Python version is 3.13, the resolution failed for other Python versions supported by your project. Consider limiting your project's supported…

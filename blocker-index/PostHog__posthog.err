@@ -1,0 +1,45 @@
+ersion of them allows the fix: Because opentelemetry-semantic-conventions==0.58b0 depends on opentelemetry-api==1.37.0 and opentelemetry-instrumen…
+   ✗ social-auth-core → 6.2.0: does not resolve together with the rest: Because social-auth-core==6.2.0 depends on requests>=2.34.0 and posthog depends on requests>=2.33.1,<2.34.dev0, we can conclude that posthog and social-auth-c…
+   ✗ transformers → 5.10.0: blocked by optimum, and no version of it allows the fix: Because optimum[onnxruntime]==1.25.3 depends on transformers>=4.36,<4.52.0 and optimum>=1.25.3 depends on transformers==5.10.0, we can conclud…
+
+   It also changes uv.lock:
+     · cuda-bindings 12.9.4 → 13.5.0
+     · gql 3.5.3 → 4.0.0
+     · triton 3.6.0 → 3.7.1
+     · cuda-toolkit 13.0.3.0 (added)
+     · nvidia-cublas 13.1.1.3 (added)
+     · nvidia-cuda-cupti 13.0.85 (added)
+     · nvidia-cuda-nvrtc 13.0.88 (added)
+     · nvidia-cuda-runtime 13.0.96 (added)
+     · nvidia-cudnn-cu13 9.20.0.48 (added)
+     · nvidia-cufft 12.0.0.61 (added)
+     · nvidia-cufile 1.15.1.6 (added)
+     · nvidia-curand 10.4.0.35 (added)
+     · nvidia-cusolver 12.0.4.66 (added)
+     · nvidia-cusparse 12.6.3.3 (added)
+     · nvidia-cusparselt-cu13 0.8.1 (added)
+     · nvidia-nccl-cu13 2.29.7 (added)
+     · nvidia-nvjitlink 13.5.37 (added)
+     · nvidia-nvshmem-cu13 3.4.5 (added)
+     · nvidia-nvtx 13.0.85 (added)
+     · nvidia-cublas-cu12 12.8.4.1 (removed: nothing requires it any more)
+     · nvidia-cuda-cupti-cu12 12.8.90 (removed: nothing requires it any more)
+     · nvidia-cuda-nvrtc-cu12 12.8.93 (removed: nothing requires it any more)
+     · nvidia-cuda-runtime-cu12 12.8.90 (removed: nothing requires it any more)
+     · nvidia-cudnn-cu12 9.10.2.21 (removed: nothing requires it any more)
+     · nvidia-cufft-cu12 11.3.3.83 (removed: nothing requires it any more)
+     · nvidia-cufile-cu12 1.13.1.3 (removed: nothing requires it any more)
+     · nvidia-curand-cu12 10.3.9.90 (removed: nothing requires it any more)
+     · nvidia-cusolver-cu12 11.7.3.90 (removed: nothing requires it any more)
+     · nvidia-cusparse-cu12 12.5.8.93 (removed: nothing requires it any more)
+     · nvidia-cusparselt-cu12 0.7.1 (removed: nothing requires it any more)
+     · nvidia-nccl-cu12 2.27.5 (removed: nothing requires it any more)
+     · nvidia-nvjitlink-cu12 12.8.93 (removed: nothing requires it any more)
+     · nvidia-nvshmem-cu12 3.4.5 (removed: nothing requires it any more)
+     · nvidia-nvtx-cu12 12.8.90 (removed: nothing requires it any more)
+
+   Dependabot resolves for the oldest Python requires-python allows (3.10) and filters out releases that need a newer one: dnspython 2.9.2 needs Python >=3.11, soupsieve 4.0.0 needs Python >=3.11.5. uv locks them only for the Pythons they support.
+
+   Verified with uv's resolver: 31 of 45 fixes resolve together.
+   Then run: uv lock --upgrade-package aiohttp==3.14.4 --upgrade-package anyio==4.14.2 --upgrade-package black==26.10.1 --upgrade-package cryptography==50.0.0 --upgrade-package datasets==5.0.1 --upgrade-package dnspython==2.9.2 --upgrade-package graphql-core==3.2.12 --upgrade-package h2==4.4.1 --upgrade-package hpack==4.2.0 --upgrade-package idna==3.15 --upgrade-package langsmith==0.8.18 --upgrade-package lxml==6.1.0 --upgrade-package mako==1.3.12 --upgrade-package mcp==1.30.0 --upgrade-package multidict==6.9.1 --upgrade-package nltk==3.10.4 --upgrade-package oauthlib==4.0.1 --upgrade-package paramiko==5.0.0 --upgrade-package pyasn1==0.6.5 --upgrade-package pydantic-settings==2.14.2 --upgrade-package pymongo==4.18.3 --upgrade-package pypdf==6.21.4 --upgrade-package python-multipart==0.0.31 --upgrade-package setuptools==84.1.0 --upgrade-package soupsieve==4.0.0 --upgrade-package sqlparse==0.6.0 --upgrade-package starlette==1.3.1 --upgrade-package torch==2.13.0 --upgrade-package urllib3==2.8.0 --upgrade-package zeep==4.3.3
+   Verified with uv's resolver only: run your tests, above all for a major version change.

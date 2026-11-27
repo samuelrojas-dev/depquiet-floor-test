@@ -1,0 +1,38 @@
+
+🔧 Fix plan
+   ✓ anyio 4.10.0 → 4.14.2: upgrade
+   ✓ certifi 2025.8.3 → 2026.10.18: upgrade  (major version change)
+   ✓ fonttools 4.59.2 → 4.60.2: upgrade
+   ✓ fsspec 2024.2.0 → 2026.6.0: upgrade  (major version change)
+   ✓ hydra-core 1.3.2 → 1.3.6: upgrade
+   ✓ idna 3.10 → 3.15: upgrade
+   ✓ modelscope 1.17.1 → 1.27.0: widen your requirement
+   ✓ msgpack 1.1.1 → 1.2.3: upgrade
+   ✓ pillow 11.3.0 → 13.0.0: upgrade  (major version change)
+   ✓ pygments 2.19.2 → 2.20.0: upgrade
+   ✓ python-dotenv 1.1.1 → 1.2.2: upgrade
+   ✓ requests 2.32.5 → 2.33.0: upgrade
+   ✓ setuptools 80.9.0 → 84.1.0: upgrade  (major version change)
+   ✓ urllib3 2.5.0 → 2.8.0: upgrade
+   ✓ werkzeug 3.1.3 → 3.1.9: upgrade
+   ✓ filelock 3.19.1 → 3.20.3: the newest fix your Python range allows (closes 2 of 4 alerts; the other 2 need Python >=3.11)
+   ✗ filelock → 4.2.1: needs a newer Python: see Python floor below
+   ✗ torch → 2.13.0: does not resolve together with the rest: Because torchaudio>=2.8.0,<=2.8.0+cu129 depends on torch==2.8.0 and your project depends on torch==2.13.0, we can conclude that your project and torchaudio>=2…
+
+   It also changes uv.lock:
+     · ⚠ matplotlib 3.10.6 → 3.2.2, 3.10.6 (an older version)
+     · ⚠ tensorboard 2.20.0 → 2.19.0, 2.20.0 (an older version)
+     · contourpy 1.3.2, 1.3.3 → 1.3.3
+     · sniffio 1.3.1 (removed: nothing requires it any more)
+   The lock moves matplotlib, tensorboard to an older version to fit the fixes together: check that before merging. In a lock forked by Python version this is usually the copy for the oldest Python you support; raising requires-python (see Python floor) may avoid it.
+
+   Python floor:
+     Raising requires-python to >=3.11 would let 1 fix install (filelock; 4 alerts), verified with uv's resolver.
+     It drops Python 3.10: fine for an application, a breaking change for users of a published library.
+     Add --raise-python-floor to put that change in the plan.
+
+   Dependabot resolves for the oldest Python requires-python allows (3.10) and filters out releases that need a newer one: pillow 13.0.0 needs Python >=3.11. uv locks them only for the Pythons they support.
+
+   Verified with uv's resolver: 15 of 17 fixes resolve together, plus 1 partial fix on your current Python range.
+   Then run: uv lock --upgrade-package anyio==4.14.2 --upgrade-package certifi==2026.10.18 --upgrade-package fonttools==4.60.2 --upgrade-package fsspec==2026.6.0 --upgrade-package hydra-core==1.3.6 --upgrade-package idna==3.15 --upgrade-package modelscope==1.27.0 --upgrade-package msgpack==1.2.3 --upgrade-package pillow==13.0.0 --upgrade-package pygments==2.20.0 --upgrade-package python-dotenv==1.2.2 --upgrade-package requests==2.33.0 --upgrade-package setuptools==84.1.0 --upgrade-package urllib3==2.8.0 --upgrade-package werkzeug==3.1.9 --upgrade-package filelock==3.20.3
+   Verified with uv's resolver only: run your tests, above all for a major version change.

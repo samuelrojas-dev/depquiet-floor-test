@@ -1,0 +1,1 @@
+depquiet: nothing scanned: pip-audit: found no registry packages to audit in uv.lock. OSV.dev fallback failed too: cannot determine OSV.dev severity for PYSEC-2026-4320.

@@ -1,0 +1,26 @@
+
+🔧 Fix plan
+   ✓ certifi 2026.7.22 → 2026.10.18: upgrade
+   ✓ nltk 3.10.3 → 3.10.4: upgrade
+   ✓ pillow 12.3.0 → 13.0.0: upgrade  (major version change)
+   ✓ pyasn1 0.6.4 → 0.6.5: upgrade
+   ✓ filelock 4.0.8 → 4.0.9: the newest fix your Python range allows (closes 1 of 14 alerts; the other 13 need Python >=3.11)
+   ✗ dnspython → 2.9.2: needs a newer Python: see Python floor below
+   ✗ filelock → 4.2.1: needs a newer Python: see Python floor below
+
+   It also changes uv.lock:
+     · ⚠ torchvision 0.29.1, 0.29.1+cpu → 0.1.6, 0.29.1, 0.29.1+cpu (an older version)
+   The lock moves torchvision to an older version to fit the fixes together: check that before merging. In a lock forked by Python version this is usually the copy for the oldest Python you support; raising requires-python (see Python floor) may avoid it.
+
+   Python floor:
+     Raising requires-python to >=3.11 would let 2 fixes install (dnspython, filelock; 16 alerts), verified with uv's resolver.
+     It drops Python 3.10: fine for an application, a breaking change for users of a published library.
+     For a library, keep requires-python and add this to pyproject.toml instead: [tool.uv] environments = ["python_full_version >= '3.11'"]. uv then locks only for those Pythons, so your CI and development get the fixes and users still install on older ones, where the fixes do not apply. Verified with uv's resolver.
+     Dependabot does not read environments: it still picks its Python from requires-python, so it will not open these updates itself, and each later fix that needs a newer Python means another manual uv lock. Raising requires-python is the only change Dependabot follows. depquiet's fix-pr Action can do that relock on a schedule and open the pull request.
+     Add --raise-python-floor to put that change in the plan.
+
+   Dependabot resolves for the oldest Python requires-python allows (3.10) and filters out releases that need a newer one: pillow 13.0.0 needs Python >=3.11. uv locks them only for the Pythons they support.
+
+   Verified with uv's resolver: 4 of 6 fixes resolve together, plus 1 partial fix on your current Python range.
+   Then run: uv lock --upgrade-package certifi==2026.10.18 --upgrade-package nltk==3.10.4 --upgrade-package pillow==13.0.0 --upgrade-package pyasn1==0.6.5 --upgrade-package filelock==4.0.9
+   Verified with uv's resolver only: run your tests, above all for a major version change.

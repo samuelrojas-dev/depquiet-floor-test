@@ -1,0 +1,8 @@
+
+🔧 Fix plan
+   ✓ nltk 3.9.4 → 3.10.4: widen your requirement
+   ✗ soupsieve → 4.0.0: already locked at 4.0.1 for the Pythons that can install it; the 3.0.1 copy is for older Pythons, and pinning 4.0.0 would move the newer copy back. Only raising requires-python to >=3.11.5 fixes the…
+
+   Verified with uv's resolver: 1 of 2 fixes resolve together.
+   Then run: uv lock --upgrade-package nltk==3.10.4
+   Verified with uv's resolver only: run your tests, above all for a major version change.

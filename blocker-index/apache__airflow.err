@@ -1,0 +1,15 @@
+
+⚠️  exclude-newer-package holds google-cloud-aiplatform at releases before 2026-08-13T00:00:00Z, older than your cooldown's cut-off (2026-11-23T20:42:23Z): uv keeps google-cloud-aiplatform on old releases. Remove the entry.
+⚠️  exclude-newer-package holds pypdf at releases before 2026-10-29T00:00:00Z, older than your cooldown's cut-off (2026-11-23T20:42:23Z): uv keeps pypdf on old releases. Remove the entry.
+
+🔧 Fix plan
+   ✓ tornado 6.6 → 6.6.1: upgrade
+   ✗ pillow → 13.0.0: fits only by moving google-cloud-bigtable back from 2.50.2 to 2.47.0, which the project depends on directly: left out. Move it back yourself if you accept that.
+   ✗ soupsieve → 4.0.1: soupsieve 4.0.0 only supports Python >=3.11.5: raise requires-python, or limit the upgrade to those Python versions with a marker. --fix-plan checks whether raising it lets the fix install.
+
+   Python floor:
+     some fixes need a newer Python, but providers/apache/tinkerpop/pyproject.toml declares requires-python '>=3.11,!=3.14.*', which depquiet will not rewrite.
+
+   Verified with uv's resolver: 1 of 3 fixes resolve together.
+   Then run: uv lock --upgrade-package tornado==6.6.1
+   Verified with uv's resolver only: run your tests, above all for a major version change.

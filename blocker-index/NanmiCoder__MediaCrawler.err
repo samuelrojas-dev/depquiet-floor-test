@@ -1,0 +1,34 @@
+
+🔧 Fix plan
+   ✓ aiomysql 0.2.0 → 0.3.0: widen your requirement
+   ✓ anyio 4.9.0 → 4.14.2: upgrade
+   ✓ certifi 2025.6.15 → 2026.10.18: upgrade  (major version change)
+   ✓ cryptography 45.0.7 → 50.0.0: upgrade  (major version change)
+   ✓ dnspython 2.8.0 → 2.9.2: upgrade
+   ✓ filelock 3.20.0 → 4.2.1: upgrade  (major version change)
+   ✓ fonttools 4.58.4 → 4.60.2: upgrade
+   ✓ idna 3.10 → 3.15: upgrade
+   ✓ lxml 6.0.0 → 6.1.0: upgrade
+   ✓ mako 1.3.10 → 1.3.12: upgrade
+   ✓ pillow 12.3.0 → 13.0.0: upgrade  (major version change)
+   ✓ pygments 2.19.2 → 2.20.0: upgrade
+   ✓ pymongo 4.15.3 → 4.18.3: upgrade
+   ✓ pytest 9.0.1 → 9.0.3: upgrade
+   ✓ python-dotenv 1.0.1 → 1.2.2: widen your requirement
+   ✓ requests 2.32.3 → 2.33.0: widen your requirement
+   ✓ starlette 0.37.2 → 1.3.1: also move fastapi → 0.163.2, which holds it back  (major version change)
+   ✓ urllib3 2.5.0 → 2.8.0: upgrade
+   ✓ virtualenv 20.35.4 → 21.14.10: upgrade  (major version change)
+
+   It also changes uv.lock:
+     · cffi 1.17.1 → 2.1.1
+     · distlib 0.4.0 → 0.4.4
+     · packaging 25.0 → 26.4
+     · annotated-doc 0.0.7 (added)
+     · opentelemetry-api 1.45.2 (added)
+     · python-discovery 1.9.7 (added)
+     · sniffio 1.3.1 (removed: nothing requires it any more)
+
+   Verified with uv's resolver: all fixes resolve together.
+   Then run: uv lock --upgrade-package aiomysql==0.3.0 --upgrade-package anyio==4.14.2 --upgrade-package certifi==2026.10.18 --upgrade-package cryptography==50.0.0 --upgrade-package dnspython==2.9.2 --upgrade-package filelock==4.2.1 --upgrade-package fonttools==4.60.2 --upgrade-package idna==3.15 --upgrade-package lxml==6.1.0 --upgrade-package mako==1.3.12 --upgrade-package pillow==13.0.0 --upgrade-package pygments==2.20.0 --upgrade-package pymongo==4.18.3 --upgrade-package pytest==9.0.3 --upgrade-package python-dotenv==1.2.2 --upgrade-package requests==2.33.0 --upgrade-package starlette==1.3.1 --upgrade-package fastapi==0.163.2 --upgrade-package urllib3==2.8.0 --upgrade-package virtualenv==21.14.10
+   Verified with uv's resolver only: run your tests, above all for a major version change.
