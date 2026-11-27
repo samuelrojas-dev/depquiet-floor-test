@@ -1,0 +1,46 @@
+name: Blocker Index collect
+on:
+  workflow_dispatch:
+    inputs:
+      run-id:
+        description: "Run whose artifacts to collect"
+        required: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: results
+          merge-multiple: true
+          run-id: ${{ inputs.run-id }}
+          github-token: ${{ github.token }}
+      - name: Keep only what the index reads
+        run: |
+          mkdir -p blocker-index
+          python3 - <<'PY'
+          import json, pathlib
+          for p in sorted(pathlib.Path("results").glob("*.json")):
+              d = json.loads(p.read_text())
+              slim = {k: d[k] for k in ("scanned", "package_manager", "error", "_meta") if k in d}
+              slim["results"] = [
+                  {k: r.get(k) for k in ("package", "cve", "verdict", "fix_version", "fix_package")}
+                  for r in d.get("results", [])
+              ]
+              slim["fix_plan"] = d.get("fix_plan")
+              pathlib.Path("blocker-index", p.name).write_text(json.dumps(slim))
+              print(p.name, p.stat().st_size, "->", pathlib.Path("blocker-index", p.name).stat().st_size)
+          PY
+          for f in results/*.err; do tail -c 4000 "$f" > "blocker-index/$(basename "$f")"; done
+      - name: Commit the results to a branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B blocker-index-results
+          git add blocker-index
+          git commit -qm "Blocker Index rerun results (run ${{ inputs.run-id }})"
+          git push -qf origin blocker-index-results
