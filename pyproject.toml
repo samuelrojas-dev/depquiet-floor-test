@@ -6,6 +6,7 @@ requires-python = ">=3.10"
 dependencies = [
     "beautifulsoup4>=4.13",
     "pillow>=12",
+    "semgrep>=1.100",
 ]
 
 [tool.uv]
