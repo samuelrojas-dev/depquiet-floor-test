@@ -1,0 +1,96 @@
+name: Blocker Index rerun
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        include:
+          - {repo: "AgriciDaniel/claude-seo", ref: "main"}
+          - {repo: "Alishahryar1/free-claude-code", ref: "main"}
+          - {repo: "BerriAI/litellm", ref: "main"}
+          - {repo: "HKUDS/DeepCode", ref: "main"}
+          - {repo: "NanmiCoder/MediaCrawler", ref: "main"}
+          - {repo: "PostHog/posthog", ref: "master"}
+          - {repo: "Textualize/textual", ref: "main"}
+          - {repo: "apache/airflow", ref: "main"}
+          - {repo: "chidiwilliams/buzz", ref: "main"}
+          - {repo: "debpalash/VoiceStudio", ref: "main"}
+          - {repo: "exo-explore/exo", ref: "main"}
+          - {repo: "experientiallabs/experiential", ref: "main"}
+          - {repo: "fishaudio/fish-speech", ref: "main"}
+          - {repo: "hsliuping/TradingAgents-CN", ref: "v3.0"}
+          - {repo: "huggingface/lerobot", ref: "main"}
+          - {repo: "jianchang512/pyvideotrans", ref: "main"}
+          - {repo: "jumpserver/jumpserver", ref: "dev"}
+          - {repo: "k2-fsa/OmniVoice", ref: "master"}
+          - {repo: "langflow-ai/langflow", ref: "main"}
+          - {repo: "m-bain/whisperX", ref: "main"}
+          - {repo: "microsoft/agent-lightning", ref: "main"}
+          - {repo: "microsoft/data-formulator", ref: "main"}
+          - {repo: "microsoft/graphrag", ref: "main"}
+          - {repo: "mitmproxy/mitmproxy", ref: "main"}
+          - {repo: "nesquena/hermes-webui", ref: "master"}
+          - {repo: "p-e-w/heretic", ref: "master"}
+          - {repo: "run-llama/llama_index", ref: "main"}
+          - {repo: "vectorize-io/hindsight", ref: "main"}
+          - {repo: "verl-project/verl", ref: "main"}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install depquiet
+        run: pip install -q "depquiet==0.60.2" pip-audit uv
+      - name: Plan
+        env:
+          REPO: ${{ matrix.repo }}
+          REF: ${{ matrix.ref }}
+        run: |
+          name="${REPO//\//__}"
+          mkdir -p out
+          if git clone -q --depth 1 --branch "$REF" "https://github.com/$REPO" target; then
+            commit=$(git -C target rev-parse HEAD)
+            start=$(date +%s)
+            SETUPTOOLS_SCM_PRETEND_VERSION=0.0.0 timeout 1800 depquiet --path target --fix-plan - --json > "out/$name.tmp" 2> "out/$name.err" || true
+            rc=${PIPESTATUS[0]}
+            python3 - "out/$name.tmp" "out/$name.json" "$REPO" "$commit" "$(( $(date +%s) - start ))" <<'PY'
+          import json, sys
+          tmp, out, repo, commit, secs = sys.argv[1:]
+          try: data = json.load(open(tmp))
+          except Exception: data = {"error": "no json"}
+          data["_meta"] = {"repo": repo, "commit": commit, "seconds": int(secs), "runner": "github-actions"}
+          json.dump(data, open(out, "w"))
+          PY
+            rm -f "out/$name.tmp"
+          else
+            echo "{\"error\": \"clone failed\", \"_meta\": {\"repo\": \"$REPO\"}}" > "out/$name.json"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: result-${{ strategy.job-index }}
+          path: out/
+  collect:
+    needs: plan
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: results
+          merge-multiple: true
+      - name: Commit the results to a branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B blocker-index-results
+          mkdir -p blocker-index && cp results/* blocker-index/
+          git add blocker-index
+          git commit -qm "Blocker Index rerun results"
+          git push -qf origin blocker-index-results
