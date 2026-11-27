@@ -1,0 +1,18 @@
+name: depquiet dashboard demo
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+jobs:
+  dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: samuelrojas-dev/depquiet@feat/alerts-dashboard
+        with:
+          fix-pr: "true"
+          fix-pr-branch: depquiet/dashboard-demo-fixes
+          dashboard: "true"
+          fail-on-action: "false"
