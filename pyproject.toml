@@ -8,3 +8,6 @@ dependencies = [
     "pillow>=12",
 ]
 
+[tool.uv]
+# Lock only for Pythons where the fixed releases install. requires-python stays >=3.10.
+environments = ["python_full_version >= '3.11.5'"]

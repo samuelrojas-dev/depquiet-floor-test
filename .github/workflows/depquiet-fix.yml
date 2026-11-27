@@ -1,0 +1,17 @@
+name: depquiet fix PR
+on:
+  schedule:
+    - cron: "17 6 * * 1"   # Mondays
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: samuelrojas-dev/depquiet@main
+        with:
+          fix-pr: "true"
+          fail-on-action: "false"
